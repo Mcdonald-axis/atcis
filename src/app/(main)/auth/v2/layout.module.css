@@ -1,0 +1,139 @@
+.panel {
+  isolation: isolate;
+  animation: panel-in 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ambientGlow {
+  background: color-mix(in oklab, var(--primary) 7%, transparent);
+  filter: blur(64px);
+  animation: ambient-drift 12s ease-in-out infinite alternate;
+}
+
+.sheen {
+  background-size: 35% 100%;
+  background-repeat: no-repeat;
+  animation: border-sheen 8s ease-in-out infinite;
+}
+
+.orbitLarge {
+  transition: border-color 500ms ease;
+  animation: orbit-drift 11s ease-in-out infinite alternate;
+}
+
+.orbitSmall {
+  transition: border-color 500ms ease;
+  animation: orbit-drift 8s ease-in-out 800ms infinite alternate-reverse;
+}
+
+.panel:hover .orbitLarge {
+  border-color: color-mix(in oklab, var(--primary) 22%, transparent);
+}
+
+.panel:hover .orbitSmall {
+  border-color: color-mix(in oklab, var(--primary) 36%, transparent);
+}
+
+.revealBrand,
+.revealEyebrow,
+.revealHeading,
+.revealBody,
+.revealStatement,
+.revealFooter {
+  opacity: 0;
+  animation: reveal-up 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.revealBrand {
+  animation-delay: 80ms;
+}
+
+.revealEyebrow {
+  animation-delay: 180ms;
+}
+
+.revealHeading {
+  animation-delay: 260ms;
+}
+
+.revealBody {
+  animation-delay: 340ms;
+}
+
+.revealStatement {
+  animation-delay: 420ms;
+}
+
+.revealFooter {
+  animation-delay: 500ms;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(14px) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ambient-drift {
+  from {
+    opacity: 0.35;
+    transform: translate3d(0, -8%, 0) scale(0.92);
+  }
+  to {
+    opacity: 0.75;
+    transform: translate3d(-18%, 12%, 0) scale(1.08);
+  }
+}
+
+@keyframes orbit-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-10px, 8px, 0);
+  }
+}
+
+@keyframes border-sheen {
+  0%,
+  28% {
+    background-position: -50% 0;
+  }
+  72%,
+  100% {
+    background-position: 150% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .ambientGlow,
+  .sheen,
+  .orbitLarge,
+  .orbitSmall,
+  .revealBrand,
+  .revealEyebrow,
+  .revealHeading,
+  .revealBody,
+  .revealStatement,
+  .revealFooter {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
